@@ -72,4 +72,3 @@ continua en atención acorde a la prioridad y orden de llegada
 retirar de la sala de urgencias, este debe ser eliminado, conservando la
 prioridad de los restantes y el orden de llegada, la eliminación debe ser por
 nombre y/o por Id.
-
