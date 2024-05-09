@@ -92,6 +92,29 @@ def insert(rootNode, value):
     
     return rootNode 
 
+def searchNode(rootNode, value):
+  if rootNode is None:
+    return
+
+  if value < rootNode.value:
+    print("ingresa izquierda")
+    print(rootNode.value)
+    if rootNode.leftchild is not None:
+      if rootNode.leftchild.value == value:
+        return "el nodo con valor {} SI fue encontrado".format(value)
+      return searchNode(rootNode.leftchild,value)
+    else:
+      return "el nodo con valor {} NO fue encontrado".format(value)
+  else:
+    print("ingresa derecha")
+    print(rootNode.value)
+    if rootNode.rightchild is not None:
+      if rootNode.rightchild.value == value:
+        return "el nodo con valor {} SI fue encontrado".format(value)
+      return searchNode(rootNode.rightchild,value)
+    else:
+      return "el nodo con valor {} NO fue encontrado".format(value)
+    
 # Método para mantener la propiedad del min-heap después de insertar un nuevo nodo
 def ParentControl(node):
     while node.parent is not None and node.value < node.parent.value:
@@ -108,6 +131,32 @@ def printTree(node, prefix="", is_left=True):
     print(prefix + ("└── " if is_left else "┌── ") + str(node.value))
     printTree(node.leftchild, prefix + ("     " if is_left else "│    "), True)
 
+def deleteNode(rootNode, value):
+  if rootNode is None:
+    return rootNode
+
+  if value < rootNode.data:
+    rootNode.leftchild = deleteNode(rootNode.leftchild, value)
+  elif value > rootNode.data:
+    rootNode.rightchild = deleteNode(rootNode.rightchild, value)
+  else:
+    #caso 1 no tiene hijos
+    if rootNode.leftchild is None and rootNode.rightchild is None:
+      return None
+    #caso 2 tiene ambos hijos
+    elif rootNode.leftchild is not None and rootNode.rightchild is not None:
+      tempNode = minsuccesor(rootNode.rightchild)
+      tempData = tempNode.data
+      deleteNode(rootNode,tempData)
+      rootNode.data = tempData
+    #caso hijo a la izquierda
+    elif rootNode.leftchild is not None:
+      return rootNode.leftchild
+    #caso hijo a la derecha
+    else:
+      return rootNode.rightchild
+
+  return rootNode
 
 def removeMin(rootNode):
     if rootNode is None:
@@ -174,7 +223,8 @@ root = insert(root, 4)
 print("Árbol de min-heap original:")
 printTree(root)
 
-
+buscar = searchNode(root, 3)
+print (buscar)
 
 min_value = removeMin(root)
 print("\nMínimo valor eliminado:", min_value)

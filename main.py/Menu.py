@@ -1,9 +1,9 @@
 from Paciente import Paciente
-
+from Hospital import Hospital
 
 class Menu:
     def __init__(self):
-        self.biblioteca = Biblioteca()
+        self.hospital = Hospital()
         self.librosParaAlquilar = Biblioteca()
         self.librosAlquilados = Biblioteca()
         self.historialLibrosAlquilados = Biblioteca()
