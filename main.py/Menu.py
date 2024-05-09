@@ -13,7 +13,7 @@ class Menu:
 
     def mostrarMenu(self):
         print("\n====================================================")
-        print("BIENVENIDO AL MENÚ DE LA BIBLIOTECA")
+        print("BIENVENIDO AL HOSPITAL")
         print("====================================================\n")
         if self.biblioteca.length == 0:
             self.mostrarOpcionesBibliotecaVacia()
