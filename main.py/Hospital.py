@@ -97,8 +97,6 @@ def searchNode(rootNode, value):
     return
 
   if value < rootNode.value:
-    print("ingresa izquierda")
-    print(rootNode.value)
     if rootNode.leftchild is not None:
       if rootNode.leftchild.value == value:
         return "el nodo con valor {} SI fue encontrado".format(value)
@@ -106,8 +104,6 @@ def searchNode(rootNode, value):
     else:
       return "el nodo con valor {} NO fue encontrado".format(value)
   else:
-    print("ingresa derecha")
-    print(rootNode.value)
     if rootNode.rightchild is not None:
       if rootNode.rightchild.value == value:
         return "el nodo con valor {} SI fue encontrado".format(value)
@@ -132,31 +128,29 @@ def printTree(node, prefix="", is_left=True):
     printTree(node.leftchild, prefix + ("     " if is_left else "│    "), True)
 
 def deleteNode(rootNode, value):
-  if rootNode is None:
-    return rootNode
+    if rootNode is None:
+        return None
 
-  if value < rootNode.data:
-    rootNode.leftchild = deleteNode(rootNode.leftchild, value)
-  elif value > rootNode.data:
-    rootNode.rightchild = deleteNode(rootNode.rightchild, value)
-  else:
-    #caso 1 no tiene hijos
-    if rootNode.leftchild is None and rootNode.rightchild is None:
-      return None
-    #caso 2 tiene ambos hijos
-    elif rootNode.leftchild is not None and rootNode.rightchild is not None:
-      tempNode = minsuccesor(rootNode.rightchild)
-      tempData = tempNode.data
-      deleteNode(rootNode,tempData)
-      rootNode.data = tempData
-    #caso hijo a la izquierda
-    elif rootNode.leftchild is not None:
-      return rootNode.leftchild
-    #caso hijo a la derecha
+    if value < rootNode.value:
+        rootNode.leftchild = deleteNode(rootNode.leftchild, value)
+    elif value > rootNode.value:
+        rootNode.rightchild = deleteNode(rootNode.rightchild, value)
     else:
-      return rootNode.rightchild
+        # Caso 1: No tiene hijos
+        if rootNode.leftchild is None and rootNode.rightchild is None:
+            return None
+        # Caso 2: Tiene ambos hijos
+        elif rootNode.leftchild is not None and rootNode.rightchild is not None:
+            tempNode = LastNode(rootNode.leftchild)
+            rootNode.value = tempNode.value
+            rootNode.leftchild = deleteNode(rootNode.leftchild, tempNode.value)
+        # Caso 3: Tiene solo un hijo
+        elif rootNode.leftchild is not None:
+            return rootNode.leftchild
+        else:
+            return rootNode.rightchild
 
-  return rootNode
+    return rootNode
 
 def removeMin(rootNode):
     if rootNode is None:
@@ -176,7 +170,7 @@ def removeMin(rootNode):
     else:
         last_node.parent.rightchild = None
     
-    heapifyDown(rootNode)
+    verificarMinHeap(rootNode)
     
     return min_value
 
@@ -194,7 +188,7 @@ def LastNode(rootNode):
     
     return current
 
-def heapifyDown(node):
+def verificarMinHeap(node):
     while node.leftchild is not None or node.rightchild is not None:
         if node.leftchild is not None and node.rightchild is not None:
             if node.leftchild.value < node.rightchild.value:
@@ -216,7 +210,7 @@ root = None
 root = insert(root, 2)
 root = insert(root, 1)
 root = insert(root, 3)
-root = insert(root, 1)
+root = insert(root, 4)
 root = insert(root, 3)
 root = insert(root, 4)
 
@@ -226,7 +220,6 @@ printTree(root)
 buscar = searchNode(root, 3)
 print (buscar)
 
-min_value = removeMin(root)
-print("\nMínimo valor eliminado:", min_value)
-print("\nÁrbol de min-heap después de eliminar el mínimo valor:")
+
+remover=deleteNode(root, 2)
 printTree(root)
