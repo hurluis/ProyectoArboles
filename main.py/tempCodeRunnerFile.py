@@ -1,2 +1,1 @@
-(min_heap.removeMin())
-min_heap.printTree()
+self.Node.deleteNode(value)

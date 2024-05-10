@@ -144,7 +144,7 @@ class MinHeap:
                 self.rightchild = self.rightchild.deleteNode(value)
         else:
             # Caso 1: No tiene hijos
-            if self.leftchild is None and self.rightchild is None:
+            if self.leftchild.value is None and self.rightchild.value is None:
                 self.length -= 1
                 return None
             # Caso 2: Tiene ambos hijos
@@ -158,7 +158,7 @@ class MinHeap:
             else:
                 self.length -= 1
                 self.removeMin()
-
+        
         return self
 
     def removeMin(self):
@@ -235,5 +235,5 @@ min_heap.printTree()
 
 
 
-min_heap.deleteNode(2)
+min_heap.deleteNode(6)
 min_heap.printTree()
