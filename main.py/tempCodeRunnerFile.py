@@ -1,3 +1,2 @@
-
-# remover=deleteNode(root, 3)
-# print(root)
+(min_heap.removeMin())
+min_heap.printTree()

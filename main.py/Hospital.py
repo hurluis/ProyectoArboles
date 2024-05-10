@@ -61,165 +61,179 @@ class queue:
 
 
 class MinHeap:
-    def __init__(self, value):
+    def __init__(self, value=None):
         self.value = value
         self.leftchild = None
         self.rightchild = None
         self.parent = None
+        self.length = 0 if value is not None else 1
+        self.queue = queue()
+        self.Node = Node(value)  # Se proporciona un valor al instanciar un objeto Node
 
-def insert(rootNode, value):
-    if rootNode is None:
-        return MinHeap(value)
+    def insert(self, value):
+      if value is None:
+          return  
+
+      if self.value is None:
+          self.value = value
+          self.length += 1
+      else:
+          # Insertar en el hijo más corto
+          if self.leftchild is None:
+              self.leftchild = MinHeap(value)
+              self.leftchild.parent = self
+              self.length += 1
+              self.queue.enqueue(self.leftchild)  
+          elif self.rightchild is None:
+              self.rightchild = MinHeap(value)
+              self.rightchild.parent = self
+              self.length += 1
+              self.queue.enqueue(self.rightchild)
+          else:
+              # Insertar en el hijo más corto
+              if self.leftchild.length <= self.rightchild.length:
+                  self.leftchild.insert(value)
+              else:
+                  self.rightchild.insert(value)
+
+      self.verificarMinHeap()
+
     
-    queue = [rootNode]
-    while queue:
-        current = queue.pop(0)
         
-        if current.leftchild is None:
-            current.leftchild = MinHeap(value)
-            current.leftchild.parent = current
-            ParentControl(current.leftchild)
-            break
-        elif current.rightchild is None:
-            current.rightchild = MinHeap(value)
-            current.rightchild.parent = current
-            ParentControl(current.rightchild)
-            break
+    def searchNode(self, value):
+        if value < self.value:
+            if self.leftchild is not None:
+                if self.leftchild.value == value:
+                    return "el nodo con valor {} SI fue encontrado".format(value)
+                return self.leftchild.searchNode(value)
+            else:
+                return "el nodo con valor {} NO fue encontrado".format(value)
         else:
-            # Agregar a la cola los nodos hijos actuales
-            queue.append(current.leftchild)
-            queue.append(current.rightchild)
+            if self.rightchild is not None:
+                if self.rightchild.value == value:
+                    return "el nodo con valor {} SI fue encontrado".format(value)
+                return self.rightchild.searchNode(value)
+            else:
+                return "el nodo con valor {} NO fue encontrado".format(value)
+
+   
     
-    return rootNode 
+    def printTree(self, node=None, prefix="", is_left=True):
+      if node is None:
+          node = self
 
-def searchNode(rootNode, value):
-  if rootNode is None:
-    return
+      if not node:
+          return
 
-  if value < rootNode.value:
-    if rootNode.leftchild is not None:
-      if rootNode.leftchild.value == value:
-        return "el nodo con valor {} SI fue encontrado".format(value)
-      return searchNode(rootNode.leftchild,value)
-    else:
-      return "el nodo con valor {} NO fue encontrado".format(value)
-  else:
-    if rootNode.rightchild is not None:
-      if rootNode.rightchild.value == value:
-        return "el nodo con valor {} SI fue encontrado".format(value)
-      return searchNode(rootNode.rightchild,value)
-    else:
-      return "el nodo con valor {} NO fue encontrado".format(value)
+      if node.rightchild:
+          self.printTree(node.rightchild, prefix + ("│    " if is_left else "    "), False)
+
+      print(prefix + ("└── " if is_left else "┌── ") + str(node.value))
+
+      if node.leftchild:
+          self.printTree(node.leftchild, prefix + ("     " if is_left else "│   "), True)
+
     
-# Método para mantener la propiedad del min-heap después de insertar un nuevo nodo
-def ParentControl(node):
-    while node.parent is not None and node.value < node.parent.value:
-        node.value, node.parent.value = node.parent.value, node.value
-        node = node.parent
-    return node
 
-# Método para imprimir el árbol
-def printTree(node, prefix="", is_left=True):
-    if not node:
-        return
+    def deleteNode(self, value):
+        if value < self.value:
+            if self.leftchild is not None:
+                self.leftchild = self.leftchild.deleteNode(value)
+        elif value > self.value:
+            if self.rightchild is not None:
+                self.rightchild = self.rightchild.deleteNode(value)
+        else:
+            # Caso 1: No tiene hijos
+            if self.leftchild is None and self.rightchild is None:
+                self.length -= 1
+                return None
+            # Caso 2: Tiene ambos hijos
+            elif self.leftchild is not None and self.rightchild is not None:
+                self.removeMin()
 
-    printTree(node.rightchild, prefix + ("│    " if is_left else "     "), False)
-    print(prefix + ("└── " if is_left else "┌── ") + str(node.value))
-    printTree(node.leftchild, prefix + ("     " if is_left else "│    "), True)
+            # Caso 3: Tiene solo un hijo
+            elif self.leftchild is not None:
+                self.length -= 1
+                self.removeMin()
+            else:
+                self.length -= 1
+                self.removeMin()
 
-def deleteNode(rootNode, value):
-    if rootNode is None:
-        return None
+        return self
 
-    if value < rootNode.value:
-        rootNode.leftchild = deleteNode(rootNode.leftchild, value)
-    elif value > rootNode.value:
-        rootNode.rightchild = deleteNode(rootNode.rightchild, value)
-    else:
-        # Caso 1: No tiene hijos
-        if rootNode.leftchild is None and rootNode.rightchild is None:
+    def removeMin(self):
+      if self.leftchild is None and self.rightchild is None:
+          if self.parent is not None:
+              if self.parent.leftchild == self:
+                  self.parent.leftchild = None
+              else:
+                  self.parent.rightchild = None
+          self.value = None
+          return None
+      
+      min_value = self.value
+      
+      last_node = self.LastNode(self)
+      
+      self.value = last_node.value
+      
+      if last_node.parent:
+          if last_node.parent.leftchild == last_node:
+              last_node.parent.leftchild = None
+          else:
+              last_node.parent.rightchild = None
+      
+      self.verificarMinHeap()
+      
+      return min_value
+
+    def LastNode(self, rootNode):
+        if rootNode is None:
             return None
-        # Caso 2: Tiene ambos hijos
-        elif rootNode.leftchild is not None and rootNode.rightchild is not None:
-            tempNode = LastNode(rootNode.leftchild)
-            rootNode.value = tempNode.value
-            rootNode.leftchild = deleteNode(rootNode.leftchild, tempNode.value)
-        # Caso 3: Tiene solo un hijo
-        elif rootNode.leftchild is not None:
-            return rootNode.leftchild
-        else:
-            return rootNode.rightchild
+        
+        queue = [rootNode]
+        while queue:
+            current = queue.pop(0)
+            if current.leftchild is not None:
+                queue.append(current.leftchild)
+            if current.rightchild is not None:
+                queue.append(current.rightchild)
+        
+        return current
 
-    return rootNode
-
-def removeMin(rootNode):
-    if rootNode is None:
-        return None
-    
-    if rootNode.leftchild is None and rootNode.rightchild is None:
-        return None
-    
-    min_value = rootNode.value
-    
-    last_node = LastNode(rootNode)
-    
-    rootNode.value = last_node.value
-    
-    if last_node.parent.leftchild == last_node:
-        last_node.parent.leftchild = None
-    else:
-        last_node.parent.rightchild = None
-    
-    verificarMinHeap(rootNode)
-    
-    return min_value
-
-def LastNode(rootNode):
-    if rootNode is None:
-        return None
-    
-    queue = [rootNode]
-    while queue:
-        current = queue.pop(0)
-        if current.leftchild is not None:
-            queue.append(current.leftchild)
-        if current.rightchild is not None:
-            queue.append(current.rightchild)
-    
-    return current
-
-def verificarMinHeap(node):
-    while node.leftchild is not None or node.rightchild is not None:
-        if node.leftchild is not None and node.rightchild is not None:
-            if node.leftchild.value < node.rightchild.value:
+    def verificarMinHeap(self):
+        node = self
+        while node.leftchild is not None or node.rightchild is not None:
+            if node.leftchild is not None and node.rightchild is not None:
+                if node.leftchild.value < node.rightchild.value:
+                    min_child = node.leftchild
+                else:
+                    min_child = node.rightchild
+            elif node.leftchild is not None:
                 min_child = node.leftchild
             else:
                 min_child = node.rightchild
-        elif node.leftchild is not None:
-            min_child = node.leftchild
-        else:
-            min_child = node.rightchild
-        
-        if node.value > min_child.value:
-            node.value, min_child.value = min_child.value, node.value
-            node = min_child
-        else:
-            break
+            
+            if node.value > min_child.value:
+                node.value, min_child.value = min_child.value, node.value
+                node = min_child
+            else:
+                break
+            
+min_heap = MinHeap()
+min_heap.insert(4)
+min_heap.insert(5)
+min_heap.insert(1)
+min_heap.insert(3)
+min_heap.insert(2)
+min_heap.insert(6)
 
-root = None
-root = insert(root, 2)
-root = insert(root, 1)
-root = insert(root, 3)
-root = insert(root, 4)
-root = insert(root, 3)
-root = insert(root, 4)
-
-print("Árbol de min-heap original:")
-printTree(root)
-
-buscar = searchNode(root, 3)
-print (buscar)
+# Imprimir el árbol resultante
+print("Árbol de min-heap:")
+min_heap.printTree()
 
 
-remover=deleteNode(root, 2)
-printTree(root)
+
+
+min_heap.deleteNode(2)
+min_heap.printTree()

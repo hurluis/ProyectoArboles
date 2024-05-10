@@ -4,10 +4,7 @@ from Hospital import Hospital
 class Menu:
     def __init__(self):
         self.hospital = Hospital()
-        self.librosParaAlquilar = Biblioteca()
-        self.librosAlquilados = Biblioteca()
-        self.historialLibrosAlquilados = Biblioteca()
-
+        
         self.mostrarMenu()
         
 
@@ -35,12 +32,12 @@ class Menu:
             self.mostrarOpcionesBibliotecaVacia()
     
     def mostrarOpcionesBibliotecaIniciada(self):
-        print("1. Agregar un libro.")
-        print("2. Eliminar un libro.")
-        print("3. Buscar un libro por su género.")
-        print("4. Buscar un libro por su título.")
-        print("5. Buscar un libro por su autor.")
-        print("6. Buscar un libro por su año de publicación.")
+        print("1. Agregar un nuevo paciente.")
+        print("2. Consultar paciente que sigue por atender.")
+        print("3. Atender paciente.")
+        print("4. Consultar los pacientes que estan en el hospital.")
+        print("5. Consultar paciente por Triaje.")
+        print("6. Retirar paciente por nombre y/o Id.")
         print("7. Mirar libros disponibles para alquilar.")
         print("8. Mirar libros alquilados.")
         print("9. Mirar libros disponibles para alquilar por género.")
