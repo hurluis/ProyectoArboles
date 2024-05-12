@@ -1,1 +1,1 @@
-self.Node.deleteNode(value)
+min_heap.deleteNode(1)

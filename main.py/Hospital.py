@@ -66,7 +66,7 @@ class MinHeap:
         self.leftchild = None
         self.rightchild = None
         self.parent = None
-        self.length = 0 if value is not None else 1
+        self.length = 0 
         self.queue = queue()
         self.Node = Node(value)  # Se proporciona un valor al instanciar un objeto Node
 
@@ -136,30 +136,28 @@ class MinHeap:
     
 
     def deleteNode(self, value):
-        if value < self.value:
-            if self.leftchild is not None:
-                self.leftchild = self.leftchild.deleteNode(value)
-        elif value > self.value:
-            if self.rightchild is not None:
-                self.rightchild = self.rightchild.deleteNode(value)
+        # Caso 1: No tiene hijos
+        if self.leftchild is None and self.rightchild is None:
+            self.length -= 1
+            return None
+        # Caso 2: Tiene ambos hijos
+        elif self.leftchild is not None and self.rightchild is not None:
+            tempNode = self.LastNode(self.leftchild)
+            self.value = tempNode.value
+            self.leftchild = self.leftchild.deleteNode(tempNode.value)
+            self.verificarMinHeap()
+        # Caso 3: Tiene solo un hijo
+        elif self.leftchild is not None:
+            self.value = self.leftchild.value
+            self.leftchild = None
+            self.length -= 1
         else:
-            # Caso 1: No tiene hijos
-            if self.leftchild.value is None and self.rightchild.value is None:
-                self.length -= 1
-                return None
-            # Caso 2: Tiene ambos hijos
-            elif self.leftchild is not None and self.rightchild is not None:
-                self.removeMin()
+            self.value = self.rightchild.value
+            self.rightchild = None
+            self.length -= 1
 
-            # Caso 3: Tiene solo un hijo
-            elif self.leftchild is not None:
-                self.length -= 1
-                self.removeMin()
-            else:
-                self.length -= 1
-                self.removeMin()
-        
         return self
+
 
     def removeMin(self):
       if self.leftchild is None and self.rightchild is None:
@@ -225,8 +223,9 @@ min_heap.insert(4)
 min_heap.insert(5)
 min_heap.insert(1)
 min_heap.insert(3)
-min_heap.insert(2)
 min_heap.insert(6)
+min_heap.insert(2)
+
 
 # Imprimir el árbol resultante
 print("Árbol de min-heap:")
@@ -234,6 +233,6 @@ min_heap.printTree()
 
 
 
+min_heap.deleteNode(2)
 
-min_heap.deleteNode(6)
 min_heap.printTree()
