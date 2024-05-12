@@ -68,36 +68,33 @@ class MinHeap:
         self.parent = None
         self.length = 0 
         self.queue = queue()
-        self.Node = Node(value)  # Se proporciona un valor al instanciar un objeto Node
+        self.Node = Node(value)  
 
     def insert(self, value):
-      if value is None:
-          return  
+        if value is None:
+            return  
 
-      if self.value is None:
-          self.value = value
-          self.length += 1
-      else:
-          # Insertar en el hijo más corto
-          if self.leftchild is None:
-              self.leftchild = MinHeap(value)
-              self.leftchild.parent = self
-              self.length += 1
-              self.queue.enqueue(self.leftchild)  
-          elif self.rightchild is None:
-              self.rightchild = MinHeap(value)
-              self.rightchild.parent = self
-              self.length += 1
-              self.queue.enqueue(self.rightchild)
-          else:
-              # Insertar en el hijo más corto
-              if self.leftchild.length <= self.rightchild.length:
-                  self.leftchild.insert(value)
-              else:
-                  self.rightchild.insert(value)
+        if self.value is None:
+            self.value = value
+            self.length = 1  
+        else:
+            if self.leftchild is None:
+                self.leftchild = MinHeap(value)
+                self.leftchild.parent = self
+                self.length += 1  
+                self.queue.enqueue(self.leftchild)  
+            elif self.rightchild is None:
+                self.rightchild = MinHeap(value)
+                self.rightchild.parent = self
+                self.length += 1  
+                self.queue.enqueue(self.rightchild)
+            else:
+                if self.leftchild.length <= self.rightchild.length:
+                    self.leftchild.insert(value)
+                else:
+                    self.rightchild.insert(value)
 
-      self.verificarMinHeap()
-
+        self.verificarMinHeap()
     
         
     def searchNode(self, value):
@@ -227,12 +224,11 @@ min_heap.insert(6)
 min_heap.insert(2)
 
 
-# Imprimir el árbol resultante
 print("Árbol de min-heap:")
 min_heap.printTree()
 
 
 
-min_heap.deleteNode(2)
+print(min_heap.length)
 
 min_heap.printTree()
