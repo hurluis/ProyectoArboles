@@ -13,12 +13,12 @@ class Menu:
         print("BIENVENIDO AL HOSPITAL")
         print("====================================================\n")
         if self.biblioteca.length == 0:
-            self.mostrarOpcionesBibliotecaVacia()
+            self.mostrarOpcionesHospitalVacio()
         elif self.biblioteca.length > 0:
-            self.mostrarOpcionesBibliotecaIniciada()
+            self.mostrarOpcionesHospitalConPacientes()
         self.mostrarMenu()
 
-    def mostrarOpcionesBibliotecaVacia(self):    
+    def mostrarOpcionesHospitalVacio(self):    
         print("1. Agregar un libro.")
         print("2. Ingresos totales por alquileres de libros hasta el momento.")
         seleccionarOpcion: int = int(input("\nIngresa tu opción: "))
@@ -29,9 +29,9 @@ class Menu:
             self.opcionSeleccionada14()
         else:
             print("\nIngresa una opción válida.\n")
-            self.mostrarOpcionesBibliotecaVacia()
+            self.mostrarOpcionesHospitalVacio()
     
-    def mostrarOpcionesBibliotecaIniciada(self):
+    def mostrarOpcionesHospitalConPacientes(self):
         print("1. Agregar un nuevo paciente.")
         print("2. Consultar paciente que sigue por atender.")
         print("3. Atender paciente.")
@@ -81,7 +81,7 @@ class Menu:
             self.opcionSeleccionada15()
         else:
             print("\nIngresa una opción válida\n")
-            self.mostrarOpcionesBibliotecaIniciada()
+            self.mostrarOpcionesHospitalConPacientes()
 
     def opcionSeleccionada1(self):
         print("\n================= Ingresemos el libro =================")

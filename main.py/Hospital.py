@@ -79,22 +79,27 @@ class MinHeap:
             self.length = 1  
         else:
             if self.leftchild is None:
-                self.leftchild = MinHeap(value)
-                self.leftchild.parent = self
+                new_node = MinHeap(value)
+                new_node.parent = self
+                self.leftchild = new_node
                 self.length += 1  
-                self.queue.enqueue(self.leftchild)  
+                self.queue.enqueue(new_node)
             elif self.rightchild is None:
-                self.rightchild = MinHeap(value)
-                self.rightchild.parent = self
+                new_node = MinHeap(value)
+                new_node.parent = self
+                self.rightchild = new_node
                 self.length += 1  
-                self.queue.enqueue(self.rightchild)
+                self.queue.enqueue(new_node)
             else:
                 if self.leftchild.length <= self.rightchild.length:
                     self.leftchild.insert(value)
+                    self.length +=1
                 else:
                     self.rightchild.insert(value)
+                    self.length +=1
 
         self.verificarMinHeap()
+
     
         
     def searchNode(self, value):
@@ -133,27 +138,50 @@ class MinHeap:
     
 
     def deleteNode(self, value):
-        # Caso 1: No tiene hijos
-        if self.leftchild is None and self.rightchild is None:
-            self.length -= 1
-            return None
-        # Caso 2: Tiene ambos hijos
-        elif self.leftchild is not None and self.rightchild is not None:
-            tempNode = self.LastNode(self.leftchild)
-            self.value = tempNode.value
-            self.leftchild = self.leftchild.deleteNode(tempNode.value)
-            self.verificarMinHeap()
-        # Caso 3: Tiene solo un hijo
-        elif self.leftchild is not None:
-            self.value = self.leftchild.value
-            self.leftchild = None
-            self.length -= 1
+        if self.value == value:
+            # Caso 1: No tiene hijos
+            if self.leftchild is None and self.rightchild is None:
+                self.value = None
+                self.length -= 1
+                return None
+            # Caso 2: Tiene ambos hijos
+            elif self.leftchild is not None and self.rightchild is not None:
+                # Elegir el sucesor inmediato (podría ser también el predecesor inmediato)
+                tempNode = self.rightchild
+                while tempNode.leftchild is not None:
+                    tempNode = tempNode.leftchild
+                self.value = tempNode.value
+                self.rightchild = self.rightchild.deleteNode(tempNode.value)
+                self.verificarMinHeap()
+            # Caso 3: Tiene solo un hijo
+            elif self.leftchild is not None:
+                self.value = self.leftchild.value
+                self.leftchild = None
+                self.length -= 1
+            else:
+                self.value = self.rightchild.value
+                self.rightchild = None
+                self.length -= 1
         else:
-            self.value = self.rightchild.value
-            self.rightchild = None
-            self.length -= 1
+            if self.leftchild is not None:
+                self.leftchild = self.leftchild.deleteNode(value)
+            if self.rightchild is not None:
+                self.rightchild = self.rightchild.deleteNode(value)
 
         return self
+
+    def verificarMinHeap(self):
+        if self.leftchild is not None:
+            if self.leftchild.value < self.value:
+                self.value, self.leftchild.value = self.leftchild.value, self.value
+                self.leftchild.verificarMinHeap()
+        if self.rightchild is not None:
+            if self.rightchild.value < self.value:
+                self.value, self.rightchild.value = self.rightchild.value, self.value
+                self.rightchild.verificarMinHeap()
+
+
+
 
 
     def removeMin(self):
@@ -161,9 +189,13 @@ class MinHeap:
           if self.parent is not None:
               if self.parent.leftchild == self:
                   self.parent.leftchild = None
+                  self.length -=1
               else:
                   self.parent.rightchild = None
+                  self.length-=1
           self.value = None
+          self.length -=1
+
           return None
       
       min_value = self.value
@@ -173,11 +205,11 @@ class MinHeap:
       self.value = last_node.value
       
       if last_node.parent:
-          if last_node.parent.leftchild == last_node:
+        if last_node.parent.leftchild == last_node:
               last_node.parent.leftchild = None
-          else:
+        else:
               last_node.parent.rightchild = None
-      
+        self.length -=1
       self.verificarMinHeap()
       
       return min_value
@@ -197,31 +229,23 @@ class MinHeap:
         return current
 
     def verificarMinHeap(self):
-        node = self
-        while node.leftchild is not None or node.rightchild is not None:
-            if node.leftchild is not None and node.rightchild is not None:
-                if node.leftchild.value < node.rightchild.value:
-                    min_child = node.leftchild
-                else:
-                    min_child = node.rightchild
-            elif node.leftchild is not None:
-                min_child = node.leftchild
-            else:
-                min_child = node.rightchild
-            
-            if node.value > min_child.value:
-                node.value, min_child.value = min_child.value, node.value
-                node = min_child
-            else:
-                break
+        if self.leftchild and self.value > self.leftchild.value:
+            self.value, self.leftchild.value = self.leftchild.value, self.value
+            self.leftchild.verificarMinHeap()
+        if self.rightchild and self.value > self.rightchild.value:
+            self.value, self.rightchild.value = self.rightchild.value, self.value
+            self.rightchild.verificarMinHeap()
+
             
 min_heap = MinHeap()
 min_heap.insert(4)
-min_heap.insert(5)
-min_heap.insert(1)
 min_heap.insert(3)
-min_heap.insert(6)
 min_heap.insert(2)
+min_heap.insert(1)
+min_heap.insert(5)
+min_heap.insert(6)
+min_heap.insert(12)
+min_heap.insert(-1)
 
 
 print("Árbol de min-heap:")
@@ -229,6 +253,12 @@ min_heap.printTree()
 
 
 
+min_heap.removeMin()
+min_heap.printTree()
+
+
+
+
 print(min_heap.length)
 
-min_heap.printTree()
+
