@@ -70,6 +70,8 @@ class MinHeap:
         self.queue = queue()
         self.Node = Node(value)  
 
+
+
     def insert(self, value):
         if value is None:
             return  
@@ -170,6 +172,8 @@ class MinHeap:
 
         return self
 
+
+
     def verificarMinHeap(self):
         if self.leftchild is not None:
             if self.leftchild.value < self.value:
@@ -179,8 +183,6 @@ class MinHeap:
             if self.rightchild.value < self.value:
                 self.value, self.rightchild.value = self.rightchild.value, self.value
                 self.rightchild.verificarMinHeap()
-
-
 
 
 
@@ -214,6 +216,8 @@ class MinHeap:
       
       return min_value
 
+
+
     def LastNode(self, rootNode):
         if rootNode is None:
             return None
@@ -227,6 +231,8 @@ class MinHeap:
                 queue.append(current.rightchild)
         
         return current
+
+
 
     def verificarMinHeap(self):
         if self.leftchild and self.value > self.leftchild.value:
