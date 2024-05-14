@@ -128,19 +128,19 @@ class MinHeap:
     
     
     def printTree(self, node=None, prefix="", is_left=True):
-      if node is None:
-          node = self
+        if node is None:
+            node = self
 
-      if not node:
-          return
+        if not node:
+            return
 
-      if node.rightchild:
-          self.printTree(node.rightchild, prefix + ("│    " if is_left else "    "), False)
+        if node.rightchild:
+            self.printTree(node.rightchild, prefix + ("│    " if is_left else "    "), False)
 
-      print(prefix + ("└── " if is_left else "┌── ") + str(node.value))
+        print(prefix + ("└── " if is_left else "┌── ") + str(node.value))
 
-      if node.leftchild:
-          self.printTree(node.leftchild, prefix + ("     " if is_left else "│   "), True)
+        if node.leftchild:
+            self.printTree(node.leftchild, prefix + ("     " if is_left else "│   "), True)
 
     
 
