@@ -104,23 +104,28 @@ class MinHeap:
 
     
         
-    def searchNode(self, value):
-        if value < self.value:
-            if self.leftchild is not None:
-                if self.leftchild.value == value:
-                    return "el nodo con valor {} SI fue encontrado".format(value)
-                return self.leftchild.searchNode(value)
-            else:
-                return "el nodo con valor {} NO fue encontrado".format(value)
-        else:
-            if self.rightchild is not None:
-                if self.rightchild.value == value:
-                    return "el nodo con valor {} SI fue encontrado".format(value)
-                return self.rightchild.searchNode(value)
-            else:
-                return "el nodo con valor {} NO fue encontrado".format(value)
+    
 
-   
+    def searchNode(self, value):
+        if self.value is None:
+            return "El nodo con valor {} NO fue encontrado".format(value)
+                    
+        if self.value == value:
+            return "El nodo con valor {} SI fue encontrado".format(value)
+                    
+        if self.leftchild is not None:
+            left_result = self.leftchild.searchNode(value)
+            if left_result != "El nodo con valor {} NO fue encontrado".format(value):
+                return left_result
+        
+        if self.rightchild is not None:
+            right_result = self.rightchild.searchNode(value)
+            if right_result != "El nodo con valor {} NO fue encontrado".format(value):
+                return right_result
+                
+        return "El nodo con valor {} NO fue encontrado".format(value)
+                
+    
     
     def printTree(self, node=None, prefix="", is_left=True):
       if node is None:
@@ -250,7 +255,7 @@ min_heap.printTree()
 min_heap.removeMin()
 min_heap.printTree()
 
-
+print(min_heap.searchNode(3))
 
 
 print(min_heap.length)
