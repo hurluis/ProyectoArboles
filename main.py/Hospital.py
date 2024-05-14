@@ -174,18 +174,6 @@ class MinHeap:
 
 
 
-    def verificarMinHeap(self):
-        if self.leftchild is not None:
-            if self.leftchild.value < self.value:
-                self.value, self.leftchild.value = self.leftchild.value, self.value
-                self.leftchild.verificarMinHeap()
-        if self.rightchild is not None:
-            if self.rightchild.value < self.value:
-                self.value, self.rightchild.value = self.rightchild.value, self.value
-                self.rightchild.verificarMinHeap()
-
-
-
     def removeMin(self):
       if self.leftchild is None and self.rightchild is None:
           if self.parent is not None:
@@ -251,7 +239,7 @@ min_heap.insert(1)
 min_heap.insert(5)
 min_heap.insert(6)
 min_heap.insert(12)
-min_heap.insert(-1)
+
 
 
 print("Árbol de min-heap:")
