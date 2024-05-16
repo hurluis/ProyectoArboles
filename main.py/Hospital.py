@@ -60,7 +60,7 @@ class queue:
       return popped_node
 
 
-class MinHeap:
+class Hospital:
     def __init__(self, value=None):
         self.value = value
         self.leftchild = None
@@ -82,14 +82,14 @@ class MinHeap:
             print("\nPaciente añadido") 
         else:
             if self.leftchild is None:
-                new_node = MinHeap(value)
+                new_node = Hospital(value)
                 new_node.parent = self
                 self.leftchild = new_node
                 self.length += 1  
                 self.queue.enqueue(new_node)
                 print("\nPaciente añadido")
             elif self.rightchild is None:
-                new_node = MinHeap(value)
+                new_node = Hospital(value)
                 new_node.parent = self
                 self.rightchild = new_node
                 self.length += 1  
@@ -248,7 +248,7 @@ class MinHeap:
             self.rightchild.verificarMinHeap()
 
             
-min_heap = MinHeap()
+min_heap = Hospital()
 min_heap.insert(4)
 min_heap.insert(3)
 min_heap.insert(2)

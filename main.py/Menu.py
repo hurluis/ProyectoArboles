@@ -1,5 +1,6 @@
 from Paciente import Paciente
 from Hospital import Hospital
+from Registrar import Registrar
 
 class Menu:
     def __init__(self):
@@ -12,21 +13,18 @@ class Menu:
         print("\n====================================================")
         print("BIENVENIDO AL HOSPITAL")
         print("====================================================\n")
-        if self.biblioteca.length == 0:
+        if self.hospital.length == 0:
             self.mostrarOpcionesHospitalVacio()
-        elif self.biblioteca.length > 0:
+        elif self.hospital.length > 0:
             self.mostrarOpcionesHospitalConPacientes()
         self.mostrarMenu()
 
     def mostrarOpcionesHospitalVacio(self):    
-        print("1. Agregar un libro.")
-        print("2. Ingresos totales por alquileres de libros hasta el momento.")
+        print("1. Agregar un paciente al hospital.")
         seleccionarOpcion: int = int(input("\nIngresa tu opción: "))
     
         if seleccionarOpcion == 1:
             self.opcionSeleccionada1()
-        elif seleccionarOpcion == 2:
-            self.opcionSeleccionada14()
         else:
             print("\nIngresa una opción válida.\n")
             self.mostrarOpcionesHospitalVacio()
@@ -38,15 +36,6 @@ class Menu:
         print("4. Consultar los pacientes que estan en el hospital.")
         print("5. Consultar paciente por Triaje.")
         print("6. Retirar paciente por nombre y/o Id.")
-        print("7. Mirar libros disponibles para alquilar.")
-        print("8. Mirar libros alquilados.")
-        print("9. Mirar libros disponibles para alquilar por género.")
-        print("10. Mirar libros alquilados por género.")
-        print("11. Alquilar libro por su género.")
-        print("12. Alquilar libro.")
-        print("13. Devolver libro.")
-        print("14. Ingresos totales por alquileres de libros hasta el momento.")
-        print("15. Intercambiar un libro deteriorado por un libro nuevo.")
         seleccionarOpcion: int = int(input("\nIngresa tu opción: "))
 
         if seleccionarOpcion == 1:
@@ -61,32 +50,14 @@ class Menu:
             self.opcionSeleccionada5()
         elif seleccionarOpcion == 6:
             self.opcionSeleccionada6()
-        elif seleccionarOpcion == 7:
-            self.opcionSeleccionada7()
-        elif seleccionarOpcion == 8:
-            self.opcionSeleccionada8()
-        elif seleccionarOpcion == 9:
-            self.opcionSeleccionada9()
-        elif seleccionarOpcion == 10:
-            self.opcionSeleccionada10()
-        elif seleccionarOpcion == 11:
-            self.opcionSeleccionada11()
-        elif seleccionarOpcion == 12:
-            self.opcionSeleccionada12()
-        elif seleccionarOpcion == 13:
-            self.opcionSeleccionada13()
-        elif seleccionarOpcion == 14:
-            self.opcionSeleccionada14()
-        elif seleccionarOpcion == 15:
-            self.opcionSeleccionada15()
         else:
             print("\nIngresa una opción válida\n")
             self.mostrarOpcionesHospitalConPacientes()
 
     def opcionSeleccionada1(self):
-        print("\n================= Ingresemos el libro =================")
-        funcionesBiblioteca = FuncionalidadesBiblioteca(self.librosParaAlquilar, self.biblioteca)
-        funcionesBiblioteca.agregarLibro()
+        print("\n================= Agregar un paciente al hospital =================")
+        AgregarPaciente = Registrar(self.hospital)
+        AgregarPaciente.agregarPaciente()
 
     def opcionSeleccionada2(self):
         print("\n================= Eliminemos el libro =================")
