@@ -20,37 +20,38 @@ class Menu:
         self.mostrarMenu()
 
     def mostrarOpcionesHospitalVacio(self):    
-        print("1. Agregar un paciente al hospital.")
-        seleccionarOpcion: int = int(input("\nIngresa tu opción: "))
-    
-        if seleccionarOpcion == 1:
+        try:
+            print("1. Agregar un paciente al hospital.")
+            seleccionarOpcion: int = int(input("\nIngresa tu opción: "))
+            seleccionarOpcion == 1
             self.opcionSeleccionada1()
-        else:
+        except:
             print("\nIngresa una opción válida.\n")
             self.mostrarOpcionesHospitalVacio()
     
     def mostrarOpcionesHospitalConPacientes(self):
-        print("1. Agregar un nuevo paciente.")
-        print("2. Consultar paciente que sigue por atender.")
-        print("3. Atender paciente.")
-        print("4. Consultar los pacientes que estan en el hospital.")
-        print("5. Consultar paciente por Triaje.")
-        print("6. Retirar paciente por nombre y/o Id.")
-        seleccionarOpcion: int = int(input("\nIngresa tu opción: "))
+        try:    
+            print("1. Agregar un nuevo paciente.")
+            print("2. Consultar paciente que sigue por atender.")
+            print("3. Atender paciente.")
+            print("4. Consultar los pacientes que estan en el hospital.")
+            print("5. Consultar paciente por Triaje.")
+            print("6. Retirar paciente por nombre y/o Id.")
+            seleccionarOpcion: int = int(input("\nIngresa tu opción: "))
 
-        if seleccionarOpcion == 1:
-            self.opcionSeleccionada1()
-        elif seleccionarOpcion == 2:
-            self.opcionSeleccionada2()
-        elif seleccionarOpcion == 3:
-            self.opcionSeleccionada3()
-        elif seleccionarOpcion == 4:
-            self.opcionSeleccionada4()
-        elif seleccionarOpcion == 5:
-            self.opcionSeleccionada5()
-        elif seleccionarOpcion == 6:
-            self.opcionSeleccionada6()
-        else:
+            if seleccionarOpcion == 1:
+                self.opcionSeleccionada1()
+            elif seleccionarOpcion == 2:
+                self.opcionSeleccionada2()
+            elif seleccionarOpcion == 3:
+                self.opcionSeleccionada3()
+            elif seleccionarOpcion == 4:
+                self.opcionSeleccionada4()
+            elif seleccionarOpcion == 5:
+                self.opcionSeleccionada5()
+            elif seleccionarOpcion == 6:
+                self.opcionSeleccionada6()
+        except:
             print("\nIngresa una opción válida\n")
             self.mostrarOpcionesHospitalConPacientes()
 
