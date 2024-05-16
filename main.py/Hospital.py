@@ -78,7 +78,8 @@ class MinHeap:
 
         if self.value is None:
             self.value = value
-            self.length = 1  
+            self.length = 1 
+            print("\nPaciente añadido") 
         else:
             if self.leftchild is None:
                 new_node = MinHeap(value)
@@ -86,19 +87,23 @@ class MinHeap:
                 self.leftchild = new_node
                 self.length += 1  
                 self.queue.enqueue(new_node)
+                print("\nPaciente añadido")
             elif self.rightchild is None:
                 new_node = MinHeap(value)
                 new_node.parent = self
                 self.rightchild = new_node
                 self.length += 1  
                 self.queue.enqueue(new_node)
+                print("\nPaciente añadido")
             else:
                 if self.leftchild.length <= self.rightchild.length:
                     self.leftchild.insert(value)
                     self.length +=1
+                    print("\nPaciente añadido")
                 else:
                     self.rightchild.insert(value)
                     self.length +=1
+                    print("\nPaciente añadido")
 
         self.verificarMinHeap()
 
@@ -150,6 +155,7 @@ class MinHeap:
             if self.leftchild is None and self.rightchild is None:
                 self.value = None
                 self.length -= 1
+                print("\nPaciente eliminado")
                 return None
             # Caso 2: Tiene ambos hijos
             elif self.leftchild is not None and self.rightchild is not None:
@@ -165,10 +171,12 @@ class MinHeap:
                 self.value = self.leftchild.value
                 self.leftchild = None
                 self.length -= 1
+                print("\nPaciente eliminado")
             else:
                 self.value = self.rightchild.value
                 self.rightchild = None
                 self.length -= 1
+                print("\nPaciente eliminado")
         else:
             if self.leftchild is not None:
                 self.leftchild = self.leftchild.deleteNode(value)
@@ -185,11 +193,14 @@ class MinHeap:
               if self.parent.leftchild == self:
                   self.parent.leftchild = None
                   self.length -=1
+                  print("\nPaciente ha sido atendido")
               else:
                   self.parent.rightchild = None
                   self.length-=1
+                  print("\nPaciente ha sido atendido")
           self.value = None
           self.length -=1
+          print("\nPaciente ha sido atendido")
 
           return None
       
@@ -205,6 +216,7 @@ class MinHeap:
         else:
               last_node.parent.rightchild = None
         self.length -=1
+        print("\nPaciente ha sido atendido")
       self.verificarMinHeap()
       
       return min_value
@@ -255,9 +267,6 @@ min_heap.printTree()
 min_heap.removeMin()
 min_heap.printTree()
 
-print(min_heap.searchNode(3))
-
-
-print(min_heap.length)
-
+min_heap.deleteNode(4)
+min_heap.printTree()
 
