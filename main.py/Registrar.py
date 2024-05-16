@@ -13,11 +13,12 @@ class Registrar:
         edad: int = int(input("Ingresa la edad del paciente: "))
         triaje: int = int(input("Ingresa el triaje de prioridad del paciente: "))
 
-        if self.hospital.value is None:
+        paciente = Paciente(numeroPaciente, genero, nombre, edad, triaje)
+        
+        if self.hospital.length==0:
             paciente = Paciente(numeroPaciente, genero, nombre, edad, triaje)
             self.hospital.insert(paciente)
-            print(self.hospital.insert(paciente))
-        elif self.hospital.value is not None:
+        elif self.hospital.length>0:
             iteraciones = 0
             for elementoHospital in self.biblioteca:
                 iteraciones += 1
@@ -31,7 +32,13 @@ class Registrar:
                 elif elementoHospital.value.numeroPaciente != numeroPaciente and self.hospital.length == iteraciones:
                     paciente = Paciente(numeroPaciente, genero, nombre, edad, triaje)
                     self.hospital.insert(paciente)
-                    print(self.hospital.insert(paciente))
                     break
+
+        print("\n====================================================")
+        print("HOSPITAL:")
+        print("====================================================\n")
+        print("\nEsta presentado por el nombre del paciente y su respectivo triaje: ")
+        print("\n")
+        self.hospital.printTree()
         
     

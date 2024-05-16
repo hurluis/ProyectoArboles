@@ -79,7 +79,6 @@ class Hospital:
         if self.value is None:
             self.value = value
             self.length = 1 
-            print("\nPaciente añadido") 
         else:
             if self.leftchild is None:
                 new_node = Hospital(value)

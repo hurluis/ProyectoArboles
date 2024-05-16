@@ -58,6 +58,8 @@ class Menu:
         print("\n================= Agregar un paciente al hospital =================")
         AgregarPaciente = Registrar(self.hospital)
         AgregarPaciente.agregarPaciente()
+        
+
 
     def opcionSeleccionada2(self):
         print("\n================= Eliminemos el libro =================")
