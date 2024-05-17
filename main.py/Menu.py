@@ -3,6 +3,7 @@ from Hospital import Hospital
 from Registrar import Registrar
 from Mostrar import Mostrar
 from Atender import Atender
+from Eliminar import Eliminar
 
 class Menu:
     def __init__(self):
@@ -57,12 +58,11 @@ class Menu:
             else:
                 print("\nIngresa una opción válida\n")
                 self.mostrarOpcionesHospitalConPacientes()
-
+    #No valida cuando hay un repetido y aun asi lo agrega(el repetido se comprueba por el numero unico)
     def opcionSeleccionada1(self):
         print("\n================= Agregar un paciente al hospital =================")
         AgregarPaciente = Registrar(self.hospital)
         AgregarPaciente.agregarPaciente()
-        
 
 
     def opcionSeleccionada2(self):
@@ -71,26 +71,34 @@ class Menu:
         MostrarPaciente = Mostrar(self.hospital)
         MostrarPaciente.mostrarPaciente()
     
+
     def opcionSeleccionada3(self):
         print("\n================= Vamos a atender a un paciente =================")
 
         AtenderPaciente = Atender(self.hospital)
         AtenderPaciente.atenderPaciente()
 
-    # def opcionSeleccionada4(self):
-    #     print("\n================= Busquemos el libro =================")
-    #     tituloLibro: str = input("Ingesa el título del libro: ")
 
-    #     buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
-    #     buscadorDeLibros.buscarLibroPorTitulo(tituloLibro)
+#DE ACA PARA ABAJO SON LOS QUE FALTAN
 
-    # def opcionSeleccionada5(self):
-    #     print("\n================= Busquemos el libro =================")
-    #     autorLibro: str = input("Ingesa el autor del libro: ")
+    #se escribe en mostrar
+    def opcionSeleccionada4(self):
+        print("\n================= Consultemos los pacientes del hospital =================")
+        tituloLibro: str = input("Ingesa el título del libro: ")
 
-    #     buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
-    #     buscadorDeLibros.buscarLibroPorAutor(autorLibro)
+        buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
+        buscadorDeLibros.buscarLibroPorTitulo(tituloLibro)
 
+
+    #se escribe en mostrar
+    def opcionSeleccionada5(self):
+        print("\n================= Consultemos los pacientes por triaje =================")
+        autorLibro: str = input("Ingesa el autor del libro: ")
+
+        buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
+        buscadorDeLibros.buscarLibroPorAutor(autorLibro)
+
+    #Este se escribe en el modulo Eliminar
     def opcionSeleccionada6(self):
         print("\n================= Retiremos un paciente del hospital =================")
         numeroPaciente: int = int(input("Ingesa el identificador único del paciente: "))
@@ -98,77 +106,6 @@ class Menu:
         buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
         buscadorDeLibros.buscarLibroPorAñoPublicacion(añoPublicacion)
 
-    # def opcionSeleccionada7(self):
-    #     print("\n================= Libros disponibles para alquilar =================")
-    #     listados = Listados(self.librosParaAlquilar, self.librosAlquilados)
-    #     listados.enlistarLibrosDisponiblesParaAlquilar()
-
-    # def opcionSeleccionada8(self):
-    #     print("\n================= Libros alquilados =================")
-    #     listados = Listados(self.librosParaAlquilar, self.librosAlquilados)
-    #     listados.enlistarLibrosAlquilados()
-
-    # def opcionSeleccionada9(self):
-    #     print("\n================= Libros disponibles para alquilar por género =================")
-    #     listados = Listados(self.librosParaAlquilar, self.librosAlquilados)
-    #     listados.enlistarLibrosDisponiblesPorGeneroParaAlquilar()
-
-    # def opcionSeleccionada10(self):
-    #     print("\n================= Libros alquilados por género =================")
-    #     listados = Listados(self.librosParaAlquilar, self.librosAlquilados)
-    #     listados.enlistarLibrosAlquiladosPorGenero()
-
-    # def opcionSeleccionada11(self):
-    #     print("\n================= Alquilemos un libro por su género =================")
-    #     generoLibro: str = input("Ingesa el género del libro: ")
-
-    #     if self.librosParaAlquilar.length > 0:
-    #         alquiler = Alquiler(self.librosParaAlquilar, self.librosAlquilados, self.historialLibrosAlquilados)
-    #         alquiler.alquilarLibroPorGenero(generoLibro)
-
-    #     else:
-    #         print(f"\nNo hay libros para alquilar con el género {generoLibro}")
-
-
-    # def opcionSeleccionada12(self):
-    #     print("\n================= Alquilemos un libro =================")
-    #     numeroLibro: str = input("Ingesa el número del libro: ")
-
-    #     if self.librosParaAlquilar.length > 0:
-    #         alquiler = Alquiler(self.librosParaAlquilar, self.librosAlquilados, self.historialLibrosAlquilados)
-    #         alquiler.alquilarLibro(numeroLibro)
-
-    #     else:
-    #         print(f"\nNo hay un libro para alquilar con el número de libro: {numeroLibro}")
-
-    # def opcionSeleccionada13(self):
-    #     print("\n================= Devolvamos un libro =================")
-    #     numeroLibro: str = input("Ingesa el número del libro: ")
-
-    #     if self.librosAlquilados.length > 0:
-    #         devolver = Devolucion(self.librosParaAlquilar, self.librosAlquilados, self.biblioteca)
-    #         devolver.devolverLibro(numeroLibro)
-
-    #     else:
-    #         print(f"\nNo hay un libro para devolver con el número de libro: {numeroLibro}")
-    
-    # def opcionSeleccionada14(self):
-    #     print("\n================= Finanzas de la biblioteca =================")
-        
-    #     if self.historialLibrosAlquilados.length > 0:
-    #         finanzasBiblioteca = Finanzas(self.historialLibrosAlquilados)
-    #         print(f"Los ingresos totales de la biblioteca son: {finanzasBiblioteca.calcularIngresosTotalesPorAlquileres()}")
-        
-    #     else:
-    #         print("No se han alquilado libros.")
-    #         print("\nIngresos totales hasta el momento: 0")
-
-    # def opcionSeleccionada15(self):
-    #     print("\n================= Intercambiemos un libro deteriorado =================")
-    #     numeroLibro: str = input("Ingesa el número del libro deteriorado: ")
-
-    #     intercambio = Intercambio(self.librosParaAlquilar, self.librosAlquilados, self.biblioteca)
-    #     intercambio.saberLibroDeteriorado(numeroLibro)
 
 menu = Menu()
 menu
