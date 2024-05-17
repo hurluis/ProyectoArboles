@@ -184,42 +184,36 @@ class Hospital:
 
         return self
 
-
+    
 
     def removeMin(self):
-      if self.leftchild is None and self.rightchild is None:
-          if self.parent is not None:
-              if self.parent.leftchild == self:
-                  self.parent.leftchild = None
-                  self.length -=1
-                  print("\nPaciente ha sido atendido")
-              else:
-                  self.parent.rightchild = None
-                  self.length-=1
-                  print("\nPaciente ha sido atendido")
-          self.value = None
-          self.length -=1
-          print("\nPaciente ha sido atendido")
-
-          return None
-      
-      min_value = self.value
-      
-      last_node = self.LastNode(self)
-      
-      self.value = last_node.value
-      
-      if last_node.parent:
-        if last_node.parent.leftchild == last_node:
-              last_node.parent.leftchild = None
+        if self.leftchild is None and self.rightchild is None:
+            if self.parent is not None:
+                if self.parent.leftchild == self:
+                    self.parent.leftchild = None
+                else:
+                    self.parent.rightchild = None
+            min_value = self.value
+            self.value = None
+            self.length -= 1
+            return min_value
+                
+        min_value = self.value
+        last_node = self.LastNode(self)
+        self.value = last_node.value
+        
+        if last_node.parent:
+            if last_node.parent.leftchild == last_node:
+                last_node.parent.leftchild = None
+            else:
+                last_node.parent.rightchild = None
+            self.length -= 1
         else:
-              last_node.parent.rightchild = None
-        self.length -=1
-        print("\nPaciente ha sido atendido")
-      self.verificarMinHeap()
-      
-      return min_value
-
+            self.value = None
+            self.length -= 1
+        
+        self.verificarMinHeap()
+        return min_value
 
 
     def LastNode(self, rootNode):

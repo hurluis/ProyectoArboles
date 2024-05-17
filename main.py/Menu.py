@@ -1,6 +1,7 @@
 from Paciente import Paciente
 from Hospital import Hospital
 from Registrar import Registrar
+from Mostrar import Mostrar
 
 class Menu:
     def __init__(self):
@@ -20,17 +21,18 @@ class Menu:
         self.mostrarMenu()
 
     def mostrarOpcionesHospitalVacio(self):    
-        try:
-            print("1. Agregar un paciente al hospital.")
-            seleccionarOpcion: int = int(input("\nIngresa tu opción: "))
-            seleccionarOpcion == 1
+            
+        print("1. Agregar un paciente al hospital.")
+        seleccionarOpcion: int = int(input("\nIngresa tu opción: "))
+        if seleccionarOpcion == 1:
             self.opcionSeleccionada1()
-        except:
+        
+        else:    
             print("\nIngresa una opción válida.\n")
             self.mostrarOpcionesHospitalVacio()
     
     def mostrarOpcionesHospitalConPacientes(self):
-        try:    
+           
             print("1. Agregar un nuevo paciente.")
             print("2. Consultar paciente que sigue por atender.")
             print("3. Atender paciente.")
@@ -51,9 +53,9 @@ class Menu:
                 self.opcionSeleccionada5()
             elif seleccionarOpcion == 6:
                 self.opcionSeleccionada6()
-        except:
-            print("\nIngresa una opción válida\n")
-            self.mostrarOpcionesHospitalConPacientes()
+            else:
+                print("\nIngresa una opción válida\n")
+                self.mostrarOpcionesHospitalConPacientes()
 
     def opcionSeleccionada1(self):
         print("\n================= Agregar un paciente al hospital =================")
@@ -63,111 +65,110 @@ class Menu:
 
 
     def opcionSeleccionada2(self):
-        print("\n================= Eliminemos el libro =================")
-        numeroLibro: str = input("Ingresa el número del libro que quieres eliminar: ")
+        print("\n================= Siguiente paciente en espera =================")
 
-        funcionesBiblioteca = FuncionalidadesBiblioteca(self.librosParaAlquilar, self.biblioteca)
-        funcionesBiblioteca.eliminarLibro(numeroLibro)
+        MostrarPaciente = Mostrar(self.hospital)
+        MostrarPaciente.mostrarPaciente()
     
-    def opcionSeleccionada3(self):
-        print("\n================= Busquemos el libro =================")
-        generoLibro: str = input("Ingesa el género del libro: ")
+    # def opcionSeleccionada3(self):
+    #     print("\n================= Busquemos el libro =================")
+    #     generoLibro: str = input("Ingesa el género del libro: ")
 
-        buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
-        buscadorDeLibros.buscarLibroPorGenero(generoLibro)
+    #     buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
+    #     buscadorDeLibros.buscarLibroPorGenero(generoLibro)
 
-    def opcionSeleccionada4(self):
-        print("\n================= Busquemos el libro =================")
-        tituloLibro: str = input("Ingesa el título del libro: ")
+    # def opcionSeleccionada4(self):
+    #     print("\n================= Busquemos el libro =================")
+    #     tituloLibro: str = input("Ingesa el título del libro: ")
 
-        buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
-        buscadorDeLibros.buscarLibroPorTitulo(tituloLibro)
+    #     buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
+    #     buscadorDeLibros.buscarLibroPorTitulo(tituloLibro)
 
-    def opcionSeleccionada5(self):
-        print("\n================= Busquemos el libro =================")
-        autorLibro: str = input("Ingesa el autor del libro: ")
+    # def opcionSeleccionada5(self):
+    #     print("\n================= Busquemos el libro =================")
+    #     autorLibro: str = input("Ingesa el autor del libro: ")
 
-        buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
-        buscadorDeLibros.buscarLibroPorAutor(autorLibro)
+    #     buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
+    #     buscadorDeLibros.buscarLibroPorAutor(autorLibro)
 
-    def opcionSeleccionada6(self):
-        print("\n================= Busquemos el libro =================")
-        añoPublicacion: int = int(input("Ingesa el año de publicación del libro: "))
+    # def opcionSeleccionada6(self):
+    #     print("\n================= Busquemos el libro =================")
+    #     añoPublicacion: int = int(input("Ingesa el año de publicación del libro: "))
 
-        buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
-        buscadorDeLibros.buscarLibroPorAñoPublicacion(añoPublicacion)
+    #     buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
+    #     buscadorDeLibros.buscarLibroPorAñoPublicacion(añoPublicacion)
 
-    def opcionSeleccionada7(self):
-        print("\n================= Libros disponibles para alquilar =================")
-        listados = Listados(self.librosParaAlquilar, self.librosAlquilados)
-        listados.enlistarLibrosDisponiblesParaAlquilar()
+    # def opcionSeleccionada7(self):
+    #     print("\n================= Libros disponibles para alquilar =================")
+    #     listados = Listados(self.librosParaAlquilar, self.librosAlquilados)
+    #     listados.enlistarLibrosDisponiblesParaAlquilar()
 
-    def opcionSeleccionada8(self):
-        print("\n================= Libros alquilados =================")
-        listados = Listados(self.librosParaAlquilar, self.librosAlquilados)
-        listados.enlistarLibrosAlquilados()
+    # def opcionSeleccionada8(self):
+    #     print("\n================= Libros alquilados =================")
+    #     listados = Listados(self.librosParaAlquilar, self.librosAlquilados)
+    #     listados.enlistarLibrosAlquilados()
 
-    def opcionSeleccionada9(self):
-        print("\n================= Libros disponibles para alquilar por género =================")
-        listados = Listados(self.librosParaAlquilar, self.librosAlquilados)
-        listados.enlistarLibrosDisponiblesPorGeneroParaAlquilar()
+    # def opcionSeleccionada9(self):
+    #     print("\n================= Libros disponibles para alquilar por género =================")
+    #     listados = Listados(self.librosParaAlquilar, self.librosAlquilados)
+    #     listados.enlistarLibrosDisponiblesPorGeneroParaAlquilar()
 
-    def opcionSeleccionada10(self):
-        print("\n================= Libros alquilados por género =================")
-        listados = Listados(self.librosParaAlquilar, self.librosAlquilados)
-        listados.enlistarLibrosAlquiladosPorGenero()
+    # def opcionSeleccionada10(self):
+    #     print("\n================= Libros alquilados por género =================")
+    #     listados = Listados(self.librosParaAlquilar, self.librosAlquilados)
+    #     listados.enlistarLibrosAlquiladosPorGenero()
 
-    def opcionSeleccionada11(self):
-        print("\n================= Alquilemos un libro por su género =================")
-        generoLibro: str = input("Ingesa el género del libro: ")
+    # def opcionSeleccionada11(self):
+    #     print("\n================= Alquilemos un libro por su género =================")
+    #     generoLibro: str = input("Ingesa el género del libro: ")
 
-        if self.librosParaAlquilar.length > 0:
-            alquiler = Alquiler(self.librosParaAlquilar, self.librosAlquilados, self.historialLibrosAlquilados)
-            alquiler.alquilarLibroPorGenero(generoLibro)
+    #     if self.librosParaAlquilar.length > 0:
+    #         alquiler = Alquiler(self.librosParaAlquilar, self.librosAlquilados, self.historialLibrosAlquilados)
+    #         alquiler.alquilarLibroPorGenero(generoLibro)
 
-        else:
-            print(f"\nNo hay libros para alquilar con el género {generoLibro}")
+    #     else:
+    #         print(f"\nNo hay libros para alquilar con el género {generoLibro}")
 
 
-    def opcionSeleccionada12(self):
-        print("\n================= Alquilemos un libro =================")
-        numeroLibro: str = input("Ingesa el número del libro: ")
+    # def opcionSeleccionada12(self):
+    #     print("\n================= Alquilemos un libro =================")
+    #     numeroLibro: str = input("Ingesa el número del libro: ")
 
-        if self.librosParaAlquilar.length > 0:
-            alquiler = Alquiler(self.librosParaAlquilar, self.librosAlquilados, self.historialLibrosAlquilados)
-            alquiler.alquilarLibro(numeroLibro)
+    #     if self.librosParaAlquilar.length > 0:
+    #         alquiler = Alquiler(self.librosParaAlquilar, self.librosAlquilados, self.historialLibrosAlquilados)
+    #         alquiler.alquilarLibro(numeroLibro)
 
-        else:
-            print(f"\nNo hay un libro para alquilar con el número de libro: {numeroLibro}")
+    #     else:
+    #         print(f"\nNo hay un libro para alquilar con el número de libro: {numeroLibro}")
 
-    def opcionSeleccionada13(self):
-        print("\n================= Devolvamos un libro =================")
-        numeroLibro: str = input("Ingesa el número del libro: ")
+    # def opcionSeleccionada13(self):
+    #     print("\n================= Devolvamos un libro =================")
+    #     numeroLibro: str = input("Ingesa el número del libro: ")
 
-        if self.librosAlquilados.length > 0:
-            devolver = Devolucion(self.librosParaAlquilar, self.librosAlquilados, self.biblioteca)
-            devolver.devolverLibro(numeroLibro)
+    #     if self.librosAlquilados.length > 0:
+    #         devolver = Devolucion(self.librosParaAlquilar, self.librosAlquilados, self.biblioteca)
+    #         devolver.devolverLibro(numeroLibro)
 
-        else:
-            print(f"\nNo hay un libro para devolver con el número de libro: {numeroLibro}")
+    #     else:
+    #         print(f"\nNo hay un libro para devolver con el número de libro: {numeroLibro}")
     
-    def opcionSeleccionada14(self):
-        print("\n================= Finanzas de la biblioteca =================")
+    # def opcionSeleccionada14(self):
+    #     print("\n================= Finanzas de la biblioteca =================")
         
-        if self.historialLibrosAlquilados.length > 0:
-            finanzasBiblioteca = Finanzas(self.historialLibrosAlquilados)
-            print(f"Los ingresos totales de la biblioteca son: {finanzasBiblioteca.calcularIngresosTotalesPorAlquileres()}")
+    #     if self.historialLibrosAlquilados.length > 0:
+    #         finanzasBiblioteca = Finanzas(self.historialLibrosAlquilados)
+    #         print(f"Los ingresos totales de la biblioteca son: {finanzasBiblioteca.calcularIngresosTotalesPorAlquileres()}")
         
-        else:
-            print("No se han alquilado libros.")
-            print("\nIngresos totales hasta el momento: 0")
+    #     else:
+    #         print("No se han alquilado libros.")
+    #         print("\nIngresos totales hasta el momento: 0")
 
-    def opcionSeleccionada15(self):
-        print("\n================= Intercambiemos un libro deteriorado =================")
-        numeroLibro: str = input("Ingesa el número del libro deteriorado: ")
+    # def opcionSeleccionada15(self):
+    #     print("\n================= Intercambiemos un libro deteriorado =================")
+    #     numeroLibro: str = input("Ingesa el número del libro deteriorado: ")
 
-        intercambio = Intercambio(self.librosParaAlquilar, self.librosAlquilados, self.biblioteca)
-        intercambio.saberLibroDeteriorado(numeroLibro)
+    #     intercambio = Intercambio(self.librosParaAlquilar, self.librosAlquilados, self.biblioteca)
+    #     intercambio.saberLibroDeteriorado(numeroLibro)
 
 menu = Menu()
 menu
