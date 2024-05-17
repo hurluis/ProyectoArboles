@@ -15,6 +15,13 @@ class Mostrar:
         
         self.hospital.insert(current)
        
+
+    def mostrarHospital(self):
+        pass
+
+
+    def mostrarTriaje(self):
+        pass
             
 
 
