@@ -2,6 +2,7 @@ from Paciente import Paciente
 from Hospital import Hospital
 from Registrar import Registrar
 from Mostrar import Mostrar
+from Atender import Atender
 
 class Menu:
     def __init__(self):
@@ -70,12 +71,11 @@ class Menu:
         MostrarPaciente = Mostrar(self.hospital)
         MostrarPaciente.mostrarPaciente()
     
-    # def opcionSeleccionada3(self):
-    #     print("\n================= Busquemos el libro =================")
-    #     generoLibro: str = input("Ingesa el género del libro: ")
+    def opcionSeleccionada3(self):
+        print("\n================= Vamos a atender a un paciente =================")
 
-    #     buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
-    #     buscadorDeLibros.buscarLibroPorGenero(generoLibro)
+        AtenderPaciente = Atender(self.hospital)
+        AtenderPaciente.atenderPaciente()
 
     # def opcionSeleccionada4(self):
     #     print("\n================= Busquemos el libro =================")

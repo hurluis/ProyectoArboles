@@ -20,7 +20,7 @@ class Registrar:
             self.hospital.insert(paciente)
         elif self.hospital.length>0:
             iteraciones = 0
-            for elementoHospital in self.biblioteca:
+            for elementoHospital in self.hospital:
                 iteraciones += 1
                 if  elementoHospital.value.numeroPaciente == numeroPaciente:
                     print("\nEl identificador del paciente ya ha sido agregado.")
