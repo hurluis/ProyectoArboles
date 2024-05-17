@@ -86,23 +86,19 @@ class Hospital:
                 self.leftchild = new_node
                 self.length += 1  
                 self.queue.enqueue(new_node)
-                print("\nPaciente añadido")
             elif self.rightchild is None:
                 new_node = Hospital(value)
                 new_node.parent = self
                 self.rightchild = new_node
                 self.length += 1  
                 self.queue.enqueue(new_node)
-                print("\nPaciente añadido")
             else:
                 if self.leftchild.length <= self.rightchild.length:
                     self.leftchild.insert(value)
                     self.length +=1
-                    print("\nPaciente añadido")
                 else:
                     self.rightchild.insert(value)
                     self.length +=1
-                    print("\nPaciente añadido")
 
         self.verificarMinHeap()
 
@@ -154,7 +150,6 @@ class Hospital:
             if self.leftchild is None and self.rightchild is None:
                 self.value = None
                 self.length -= 1
-                print("\nPaciente eliminado")
                 return None
             # Caso 2: Tiene ambos hijos
             elif self.leftchild is not None and self.rightchild is not None:
@@ -170,12 +165,10 @@ class Hospital:
                 self.value = self.leftchild.value
                 self.leftchild = None
                 self.length -= 1
-                print("\nPaciente eliminado")
             else:
                 self.value = self.rightchild.value
                 self.rightchild = None
                 self.length -= 1
-                print("\nPaciente eliminado")
         else:
             if self.leftchild is not None:
                 self.leftchild = self.leftchild.deleteNode(value)

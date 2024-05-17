@@ -91,12 +91,12 @@ class Menu:
     #     buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
     #     buscadorDeLibros.buscarLibroPorAutor(autorLibro)
 
-    # def opcionSeleccionada6(self):
-    #     print("\n================= Busquemos el libro =================")
-    #     añoPublicacion: int = int(input("Ingesa el año de publicación del libro: "))
+    def opcionSeleccionada6(self):
+        print("\n================= Retiremos un paciente del hospital =================")
+        numeroPaciente: int = int(input("Ingesa el identificador único del paciente: "))
 
-    #     buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
-    #     buscadorDeLibros.buscarLibroPorAñoPublicacion(añoPublicacion)
+        buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
+        buscadorDeLibros.buscarLibroPorAñoPublicacion(añoPublicacion)
 
     # def opcionSeleccionada7(self):
     #     print("\n================= Libros disponibles para alquilar =================")
