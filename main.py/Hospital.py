@@ -60,6 +60,8 @@ class queue:
       return popped_node
 
 
+from ComparacionTriaje import compararTriaje
+
 class Hospital:
     def __init__(self, value=None):
         self.value = value
@@ -69,8 +71,6 @@ class Hospital:
         self.length = 0 
         self.queue = queue()
         self.Node = Node(value)  
-
-
 
     def insert(self, value):
         if value is None:
@@ -95,10 +95,10 @@ class Hospital:
             else:
                 if self.leftchild.length <= self.rightchild.length:
                     self.leftchild.insert(value)
-                    self.length +=1
+                    self.length += 1
                 else:
                     self.rightchild.insert(value)
-                    self.length +=1
+                    self.length += 1
 
         self.verificarMinHeap()
 
@@ -226,33 +226,11 @@ class Hospital:
 
 
     def verificarMinHeap(self):
-        if self.leftchild and self.value > self.leftchild.value:
+        if self.leftchild and compararTriaje(self.value, self.leftchild.value) > 0:
             self.value, self.leftchild.value = self.leftchild.value, self.value
             self.leftchild.verificarMinHeap()
-        if self.rightchild and self.value > self.rightchild.value:
+        if self.rightchild and compararTriaje(self.value, self.rightchild.value) > 0:
             self.value, self.rightchild.value = self.rightchild.value, self.value
             self.rightchild.verificarMinHeap()
 
-            
-min_heap = Hospital()
-min_heap.insert(4)
-min_heap.insert(3)
-min_heap.insert(2)
-min_heap.insert(1)
-min_heap.insert(5)
-min_heap.insert(6)
-min_heap.insert(12)
-
-
-
-print("Árbol de min-heap:")
-min_heap.printTree()
-
-
-
-min_heap.removeMin()
-min_heap.printTree()
-
-min_heap.deleteNode(4)
-min_heap.printTree()
-
+        

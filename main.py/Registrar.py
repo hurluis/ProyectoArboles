@@ -15,23 +15,22 @@ class Registrar:
 
         paciente = Paciente(numeroPaciente, genero, nombre, edad, triaje)
         
-        current = self.hospital.queue.linkedlist.head
-        while current is not None:
-            if current.value.numeroPaciente == numeroPaciente:  
-                print("\nEl identificador del paciente ya ha sido agregado.")
-                print("\nIngrese un identificador diferente.\n")
-                self.agregarPaciente()
-                return  
-            current = current.next
 
         self.hospital.insert(paciente)
         print("paciente añadido\n")
-
-        print("\n====================================================")
-        print("HOSPITAL:")
-        print("====================================================\n")
-        print("\nEsta presentado por el nombre del paciente y su respectivo triaje: ")
-        print("\n")
-        self.hospital.printTree()
         
-    
+        
+        
+# paciente1 = Paciente(1, 'M', 'Pedro', 67, 4)       
+# paciente2 = Paciente(2, 'F', 'Teresa', 45, 2)
+# paciente3 = Paciente(3, 'M', 'Julio', 75, 1)
+# paciente4 = Paciente(4, 'F', 'Sofia', 15, 4)
+
+# sistema = Hospital()
+# sistema.insert(paciente1)
+# sistema.insert(paciente2)
+# sistema.insert(paciente3)
+# sistema.insert(paciente4)
+
+# sistema.printTree()
+

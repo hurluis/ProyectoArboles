@@ -84,23 +84,27 @@ class Menu:
     #se escribe en mostrar
     def opcionSeleccionada4(self):
         print("\n================= Consultemos los pacientes del hospital =================")
-        Mostrarhospital = Mostrar(self.hospital)
-        Mostrarhospital.mostrarHospital()
+        tituloLibro: str = input("Ingesa el título del libro: ")
+
+        buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
+        buscadorDeLibros.buscarLibroPorTitulo(tituloLibro)
+
+
     #se escribe en mostrar
-    
     def opcionSeleccionada5(self):
         print("\n================= Consultemos los pacientes por triaje =================")
-        Triaje = int(input("Ingrese el Triaje a consultar"))      
-        Mostrarportriaje = Mostrar(self.hospital)
-        Mostrarportriaje.mostrarTriaje(Triaje)
+        autorLibro: str = input("Ingesa el autor del libro: ")
+
+        buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
+        buscadorDeLibros.buscarLibroPorAutor(autorLibro)
 
     #Este se escribe en el modulo Eliminar
     def opcionSeleccionada6(self):
         print("\n================= Retiremos un paciente del hospital =================")
-        numeroPaciente: str = (input("Ingresa el identificador único del paciente: "))
+        numeroPaciente: int = int(input("Ingesa el identificador único del paciente: "))
 
-        EliminaPaciente = Eliminar(self.hospital)
-        EliminaPaciente.eliminar_paciente(numeroPaciente)
+        buscadorDeLibros = Buscador(self.biblioteca, self.librosParaAlquilar)
+        buscadorDeLibros.buscarLibroPorAñoPublicacion(añoPublicacion)
 
 
 menu = Menu()
