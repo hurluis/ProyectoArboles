@@ -4,12 +4,32 @@ from Registrar import Registrar
 from Mostrar import Mostrar
 from Atender import Atender
 from Eliminar import Eliminar
+from NivelPaciente import NivelPaciente
 
 class Menu:
+
     def __init__(self):
         self.hospital = Hospital()
-        
+        paciente1 = Paciente(1, 'M', 'Pedro', 67, 4)       
+        paciente2 = Paciente(2, 'F', 'Teresa', 45, 2)
+        paciente3 = Paciente(3, 'M', 'Julio', 75, 1)
+        paciente4 = Paciente(4, 'F', 'Sofia', 15, 4)
+        paciente5 = Paciente(5, 'M', 'Juan', 12, 3)
+        paciente6 = Paciente(6, 'F', 'Sofia', 35, 1)
+        paciente7 = Paciente(7, 'M', 'Jonh', 40, 5)
+
+        self.hospital.insert(paciente1)
+        self.hospital.insert(paciente2)
+        self.hospital.insert(paciente3)
+        self.hospital.insert(paciente4)
+        self.hospital.insert(paciente5)
+        self.hospital.insert(paciente6)
+        self.hospital.insert(paciente7)
         self.mostrarMenu()
+    # def __init__(self):
+    #     self.hospital = Hospital()
+        
+    #     self.mostrarMenu()
         
 
     def mostrarMenu(self):
@@ -107,14 +127,15 @@ class Menu:
 
     def opcionSeleccionada7(self):
         print("\n================= Buscar nivel del paciente en el árbol =================")
-        numeroPaciente:int = int(input("Ingresa el identificador único del paciente: "))
-        
-        nivel = self.hospital.encontrarNivelValor(numeroPaciente)
-        if nivel > 0:
+        numeroPaciente = input("Ingresa el identificador único del paciente: ")
+        buscador = NivelPaciente(self.hospital)
+        nivel = buscador.buscarNivel(numeroPaciente)
+        if nivel >= 0:
             print(f"El paciente con identificador {numeroPaciente} se encuentra en el nivel {nivel} del árbol.")
         else:
             print(f"No se encontró el paciente con identificador {numeroPaciente} en el árbol.")
-
+        
+        
 
 menu = Menu()
 menu
