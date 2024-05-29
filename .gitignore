@@ -1,0 +1,5 @@
+# Carpeta temporal de archivos compilados de Python
+__pycache__
+.idea
+.pytest_cache
+.tempCodeRunnerFile
