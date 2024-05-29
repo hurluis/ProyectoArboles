@@ -103,16 +103,7 @@ class Hospital:
         self.verificarMinHeap()
 
     
-    def get_level(self, node):
-        """Calculates the level of a node in the tree."""
-        if node is None:
-            return -1  # Base case for non-existent node
-        level = 0
-        parent = node.parent
-        while parent:
-            level += 1
-            parent = parent.parent
-        return level
+    
     
 
     def searchNode(self, value):
@@ -244,3 +235,5 @@ class Hospital:
 
 
 
+
+    
