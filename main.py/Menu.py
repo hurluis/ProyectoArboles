@@ -4,7 +4,6 @@ from Registrar import Registrar
 from Mostrar import Mostrar
 from Atender import Atender
 from Eliminar import Eliminar
-from NivelPaciente import NivelPaciente
 
 class Menu:
 
@@ -125,15 +124,7 @@ class Menu:
         EliminaPaciente = Eliminar(self.hospital)
         EliminaPaciente.eliminar_paciente(numeroPaciente)
 
-    def opcionSeleccionada7(self):
-        print("\n================= Buscar nivel del paciente en el árbol =================")
-        numeroPaciente = input("Ingresa el identificador único del paciente: ")
-        buscador = NivelPaciente(self.hospital)
-        nivel = buscador.buscarNivel(numeroPaciente)
-        if nivel >= 0:
-            print(f"El paciente con identificador {numeroPaciente} se encuentra en el nivel {nivel} del árbol.")
-        else:
-            print(f"No se encontró el paciente con identificador {numeroPaciente} en el árbol.")
+   
         
         
 
