@@ -60,8 +60,6 @@ class queue:
       return popped_node
 
 
-from ComparacionTriaje import compararTriaje
-
 class Hospital:
     def __init__(self, value=None):
         self.value = value
@@ -71,6 +69,8 @@ class Hospital:
         self.length = 0 
         self.queue = queue()
         self.Node = Node(value)  
+
+
 
     def insert(self, value):
         if value is None:
@@ -95,10 +95,10 @@ class Hospital:
             else:
                 if self.leftchild.length <= self.rightchild.length:
                     self.leftchild.insert(value)
-                    self.length += 1
+                    self.length +=1
                 else:
                     self.rightchild.insert(value)
-                    self.length += 1
+                    self.length +=1
 
         self.verificarMinHeap()
 
@@ -226,11 +226,228 @@ class Hospital:
 
 
     def verificarMinHeap(self):
-        if self.leftchild and compararTriaje(self.value, self.leftchild.value) > 0:
+        if self.leftchild and self.value > self.leftchild.value:
             self.value, self.leftchild.value = self.leftchild.value, self.value
             self.leftchild.verificarMinHeap()
-        if self.rightchild and compararTriaje(self.value, self.rightchild.value) > 0:
+        if self.rightchild and self.value > self.rightchild.value:
             self.value, self.rightchild.value = self.rightchild.value, self.value
             self.rightchild.verificarMinHeap()
 
+
+
+
+    def MostrarHojas(self):
+        Hojas = []
+        self.ObtenerHojas(self, Hojas)
+        return Hojas   
+
+    def ObtenerHojas(self, node, Hojas):
+        if node is None:
+            return
+
+        if node.leftchild is None and node.rightchild is None:
+            Hojas.append(node.value)
+
+        if node.leftchild:
+            self.ObtenerHojas(node.leftchild, Hojas)
+
+        if node.rightchild:
+            self.ObtenerHojas(node.rightchild, Hojas)
+
+    #Valor en las hojas
+    def encontrarEnHojas(self, numero):
+        Current=[]
+        for elemento in self.MostrarHojas():
+            if elemento ==numero:
+                Current.append(elemento)
+        return print(len(Current))
+    
+    #numero presente en el arbol
+    def CantidadNumeros(self, elemento):
+        if self is None:
+            return 0
+        almacenador = 1 if self.value == elemento else 0
+        contadorIzquiuera = self.leftchild.CantidadNumeros(elemento) if self.leftchild else 0
+        condadorDerecha = self.rightchild.CantidadNumeros(elemento) if self.rightchild else 0
+
+        return almacenador +    contadorIzquiuera + condadorDerecha
+    
+    def mostrarElementosArbol(self):
+        elements = []
+        if self.leftchild:
+            elements.extend(self.leftchild.mostrarElementosArbol())
+        elements.append(self.value)
+        if self.rightchild:
+            elements.extend(self.rightchild.mostrarElementosArbol())
+        return elements
+    
+
+    def levelOrderTraversal(self):
+        if not self:
+            return []
+
+        elements = []
+        customqueue = queue()
+        customqueue.enqueue(self)
+
+        while not customqueue.is_empty():
+            current = customqueue.dequeue()
+            elements.append(current.value.value)  
+            if current.value.leftchild:
+                customqueue.enqueue(current.value.leftchild)
+
+            if current.value.rightchild:
+                customqueue.enqueue(current.value.rightchild)
+
+        return print(elements)
+    
+    def deepestLeftChild(self):
+        if not self:
+            return None
+        
+        while self.leftchild:
+            self = self.leftchild
+        return self
+
+    def deepestRightChild(self):
+        if not self:
+            return None
+        
+        while self.rightchild:
+            self = self.rightchild
+        return self
+    
+    def deepestValue(self):
+        deepest_left = self.deepestLeftChild()
+        deepest_right = self.deepestRightChild()
+
+        if deepest_left and deepest_right:
+            return deepest_left.value if deepest_left.value > deepest_right.value else deepest_right.value
+        elif deepest_left:
+            return deepest_left.value
+        elif deepest_right:
+            return deepest_right.value
+        else:
+            return self.value
+
+    def DiferenciaAbsolutaMinima(self):
+        values = self.mostrarElementosArbol()
+        
+        minima = float('inf')
+        for elemento in range(1, len(values)):
+            diferencia = abs(values[elemento] - values[elemento-1])
+            if diferencia < minima:
+                minima = diferencia
+        
+        return minima
+
+    def valor_mayor(self):
+        current=[]
+        iteraciones=0
+        while len(self.mostrarElementosArbol()) != iteraciones:
+            mayor=float('-inf')
+            for elemento in self.mostrarElementosArbol():
+                mayor=max(mayor, elemento)
+                iteraciones+=1
+            current.append(mayor)
+        return current
+
+    def calcular_altura(self):
+        if not self:
+            return 0
+        if self.leftchild:
+            altura_izquierda = self.leftchild.calcular_altura()
+        else:
+            altura_izquierda = 0
+        if self.rightchild:
+            altura_derecha = self.rightchild.calcular_altura()
+        else:
+            altura_derecha = 0
+        return max(altura_izquierda, altura_derecha) + 1
+    
+    def cantidad_nodos(self):
+        current=self.mostrarElementosArbol()
+        return len(current)
+
+    def calcsuma_arbol(self):
+        suma_total = self.value
+    
+        if self.leftchild:
+            suma_total += self.leftchild.calcsuma_arbol()
+        
+        if self.rightchild:
+            suma_total += self.rightchild.calcsuma_arbol()
+        
+        return suma_total
+    
+    def encontrarNivelValor(self, valor, nivel=0):
+        if self.value == valor:
+            return nivel
+        
+        nivel_izquierdo = self.leftchild.encontrarNivelValor(valor, nivel + 1) if self.leftchild else 0
+        nivel_derecho = self.rightchild.encontrarNivelValor(valor, nivel + 1) if self.rightchild else 0
+            
+        nivelEncontrado= max(nivel_izquierdo, nivel_derecho)
+        return nivelEncontrado
+    
+    def operacion_arbol(self):
+        resultado_izquierdo = 0
+        resultado_derecho = 0
+
+        if self.leftchild:
+            if self.leftchild.leftchild and self.leftchild.rightchild:
+                suma_hijos_izquierdo = self.leftchild.leftchild.calcsuma_arbol() + self.leftchild.rightchild.calcsuma_arbol()
+                resultado_izquierdo = suma_hijos_izquierdo * self.leftchild.value
+        if self.rightchild:
+            if self.rightchild.leftchild and self.rightchild.rightchild:
+                suma_hijos_derecho = self.rightchild.leftchild.calcsuma_arbol() + self.rightchild.rightchild.calcsuma_arbol()
+                resultado_derecho = suma_hijos_derecho * self.rightchild.value
+
+        resultado = resultado_izquierdo - resultado_derecho
+        return resultado
+    
+
+hospital = Hospital()
+hospital.insert(10)
+hospital.insert(5)
+hospital.insert(15)
+hospital.insert(13)
+hospital.insert(7)
+hospital.insert(44)
+hospital.insert(2)
+hospital.insert(1)
+hospital.insert(4)
+
+
+# Print the tree
+hospital.printTree()
+
+print(hospital.encontrarNivelValor(15))
+"""Hojas = hospital.MostrarHojas()
+print("\nHojas:", Hojas)
+
+# Print the tree after getting Hojas
+print("\nTree after getting Hojas (should be unchanged):")
+hospital.printTree()
+
+hospital.encontrarEnHojas(4)
+
+print(hospital.CantidadNumeros(4))
+
+nodos=hospital.mostrarElementosArbol()
+print("\nNodos del arbol: ", nodos)
+
+(hospital.levelOrderTraversal())
+
+print(hospital.deepestRightChild().value)
+
+print(hospital.calcsuma_arbol())
+
+print("Árbol original:")
+hospital.printTree()
+
+
+
+print("\nÁrbol invertido:")
+hospital.printTree()"""
         
