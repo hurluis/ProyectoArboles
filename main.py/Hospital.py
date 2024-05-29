@@ -70,7 +70,6 @@ class Hospital:
         self.length = 0 
         self.queue = queue()
         self.Node = Node(value)  
-        self.levels = {}  # Diccionario para almacenar los niveles de inserción inicial
 
     def insert(self, value: Paciente):
         if value is None:
