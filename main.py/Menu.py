@@ -60,7 +60,6 @@ class Menu:
             print("4. Consultar los pacientes que estan en el hospital.")
             print("5. Consultar paciente por Triaje.")
             print("6. Retirar paciente por nombre y/o Id.")
-            print("7. Buscar nivel del paciente en el árbol.")
             seleccionarOpcion: int = int(input("\nIngresa tu opción: "))
 
             if seleccionarOpcion == 1:
@@ -75,8 +74,6 @@ class Menu:
                 self.opcionSeleccionada5()
             elif seleccionarOpcion == 6:
                 self.opcionSeleccionada6()
-            elif seleccionarOpcion ==7:
-                self.opcionSeleccionada7()
             else:
                 print("\nIngresa una opción válida\n")
                 self.mostrarOpcionesHospitalConPacientes()
