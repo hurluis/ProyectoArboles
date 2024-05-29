@@ -8,10 +8,8 @@ class Eliminar:
     def eliminar_paciente(self, id):
         # Asume que id es el número de paciente
         if self.hospital.deleteNode(Paciente(id, "", "", 0, 0)):
-            print("\n")
-            print("Paciente ha sido retirado de la lista de espera con éxito")
+            return print("Paciente ha sido retirado de la lista de espera con éxito")
         else:
-            print("\n")
             print("No se encontro el paciente a retirar")
 
 """paciente1 = Paciente(1, 'M', 'Pedro', 67, 4)       

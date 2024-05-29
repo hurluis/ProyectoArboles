@@ -7,7 +7,7 @@ class Registrar:
 
 
     def agregarPaciente(self):
-        numeroPaciente: str = input("Ingresa el identificador único del paciente: ")
+        numeroPaciente: int = input("Ingresa el identificador único del paciente: ")
         genero: str = input("Ingresa el género del paciente: ")
         nombre: str = input("Ingresa el nombre del paciente: ")
         edad: int = int(input("Ingresa la edad del paciente: "))

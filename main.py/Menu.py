@@ -97,7 +97,7 @@ class Menu:
     #Este se escribe en el modulo Eliminar
     def opcionSeleccionada6(self):
         print("\n================= Retiremos un paciente del hospital =================")
-        numeroPaciente: str = (input("Ingresa el identificador único del paciente: "))
+        numeroPaciente: int = int(input("Ingresa el identificador único del paciente: "))
 
         EliminaPaciente = Eliminar(self.hospital)
         EliminaPaciente.eliminar_paciente(numeroPaciente)

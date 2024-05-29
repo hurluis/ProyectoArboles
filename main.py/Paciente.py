@@ -1,6 +1,6 @@
 class Paciente:
     
-    def __init__(self, numeroPaciente: str, genero: str, nombre: str, Edad: int, Triaje: int):
+    def __init__(self, numeroPaciente: int, genero: str, nombre: str, Edad: int, Triaje: int):
         self.numeroPaciente = numeroPaciente
         self.genero = genero
         self.nombre = nombre
